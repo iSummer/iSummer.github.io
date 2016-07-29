@@ -1409,6 +1409,16 @@ pre .javascript .function {
 .sidebar a:hover {
   color: #eee;
 }
+@media (min-width: 768px) and (max-width: 991px) {
+  .sidebar {
+    display: none !important;
+  }
+}
+@media (max-width: 767px) {
+  .sidebar {
+    display: none !important;
+  }
+}
 .sidebar-inner {
   position: relative;
   padding: 20px 10px;
@@ -1429,6 +1439,11 @@ pre .javascript .function {
   -webkit-transform: translateZ(0);
 }
 @media (min-width: 768px) and (max-width: 991px) {
+  .sidebar-toggle {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
   .sidebar-toggle {
     display: none;
   }
@@ -1534,7 +1549,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #5ef9ff;
+  background: #8a8538;
 }
 .links-of-blogroll {
   font-size: 13px;
