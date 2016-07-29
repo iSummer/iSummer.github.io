@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo," />
+  <meta name="keywords" content="C++," />
 
 
 
@@ -86,16 +86,16 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta name="description" content="编程处理数据的时候，经常会遇到需要从文件夹下读取所有文件的情况。这个在python和matlab等语言中比较容易实现，但在C语言中会相对麻烦些。作为一个小的功能模块，做个总结，方便大家学习使用。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2016/07/28/hello-world/index.html">
+<meta property="og:title" content="C++读取目录下所用文件">
+<meta property="og:url" content="http://yoursite.com/2016/07/29/C-读取目录下所用文件/index.html">
 <meta property="og:site_name" content="Isummer's Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
-<meta property="og:updated_time" content="2016-07-29T07:40:35.041Z">
+<meta property="og:description" content="编程处理数据的时候，经常会遇到需要从文件夹下读取所有文件的情况。这个在python和matlab等语言中比较容易实现，但在C语言中会相对麻烦些。作为一个小的功能模块，做个总结，方便大家学习使用。">
+<meta property="og:updated_time" content="2016-07-29T10:55:53.543Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta name="twitter:title" content="C++读取目录下所用文件">
+<meta name="twitter:description" content="编程处理数据的时候，经常会遇到需要从文件夹下读取所有文件的情况。这个在python和matlab等语言中比较容易实现，但在C语言中会相对麻烦些。作为一个小的功能模块，做个总结，方便大家学习使用。">
 
 
 
@@ -116,9 +116,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/07/28/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/07/29/C-读取目录下所用文件/"/>
 
-  <title> Hello World | Isummer's Blog </title>
+  <title> C++读取目录下所用文件 | Isummer's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -258,7 +258,7 @@
             
             
               
-                Hello World
+                C++读取目录下所用文件
               
             
           </h1>
@@ -270,8 +270,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-28T10:13:30+08:00" content="2016-07-28">
-              2016-07-28
+            <time itemprop="dateCreated" datetime="2016-07-29T18:40:03+08:00" content="2016-07-29">
+              2016-07-29
             </time>
           </span>
 
@@ -284,8 +284,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/杂文/" itemprop="url" rel="index">
-                    <span itemprop="name">杂文</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
                   </a>
                 </span>
 
@@ -300,8 +300,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/07/28/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/28/hello-world/" itemprop="commentsCount"></span>
+                <a href="/2016/07/29/C-读取目录下所用文件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/29/C-读取目录下所用文件/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -324,15 +324,10 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.<br><a id="more"></a></p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p>　　编程处理数据的时候，经常会遇到需要从文件夹下读取所有文件的情况。这个在python和matlab等语言中比较容易实现，但在C语言中会相对麻烦些。作为一个小的功能模块，做个总结，方便大家学习使用。<br><a id="more"></a></p>
+<p>上代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">用到的头文件是 #include &lt;io.h&gt;</div><div class="line">函数参数：</div><div class="line">    path 需要读取的目录路径（如：D:\\imgs）	    </div><div class="line">    suffix 需要读取的文件类型（如：png）</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">listFile</span><span class="params">(<span class="built_in">string</span> path, <span class="built_in">string</span> suffix)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">string</span> filepath = path + <span class="string">"/*."</span> + suffix;</div><div class="line">    <span class="keyword">_finddata_t</span> fileinfo; <span class="comment">//文件记录结构</span></div><div class="line">    <span class="keyword">long</span> handle = <span class="number">0</span>; <span class="comment">//文件句柄</span></div><div class="line">    <span class="keyword">if</span>((handle = <span class="number">_f</span>indfirst(filepath.c_str(),&amp;fileinfo)) == <span class="number">-1</span>L)</div><div class="line">    &#123;</div><div class="line">		<span class="comment">//用 _findfirst 函数获取句柄，返回-1时，表示获取失败。</span></div><div class="line">	    <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">do</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(fileinfo.attrib &amp; <span class="number">_</span>A_SUBDIR) <span class="comment">//比较文件类型是否是文件夹</span></div><div class="line">        &#123;</div><div class="line">	        <span class="comment">//子目录</span></div><div class="line">            <span class="keyword">if</span>(<span class="built_in">strcmp</span>(fileinfo.name,<span class="string">"."</span>)!=<span class="number">0</span> &amp;&amp; <span class="built_in">strcmp</span>(fileinfo.name,<span class="string">".."</span>)!=<span class="number">0</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="comment">//递归遍历子目录</span></div><div class="line">                listFile(path+<span class="string">"\\"</span>+fileinfo.name, suffix);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            <span class="built_in">cout</span>&lt;&lt;path+<span class="string">"\\"</span>+fileinfo.name&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">while</span>(<span class="number">_f</span>indnext(handle,&amp;fileinfo)==<span class="number">0</span>);</div><div class="line">    <span class="comment">// 用 _findnext 函数遍历下一个文件，成功时返回0， 失败时返回-1</span></div><div class="line">    <span class="number">_f</span>indclose(handle);</div><div class="line">    <span class="comment">// 用 _findclose 函数关闭句柄</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>　　这个程序的功能是打印目录下特定类型的所有文件名称，大家可以根据这个代码的框架，具体到实际情况中，做修改使用。用到的文件结构 <a href="http://baike.baidu.com/link?url=D-Yd-B-iIbTQZNscOX6LkABtnX24ZgbwI-A8DRIqPB4DcxdVGC3KpA8w0gjH3j0agalY5SAnHyIqMJwazckNgK" target="_blank" rel="external">_finddata_t</a> 和函数 _findfirst ,  <a href="http://baike.baidu.com/link?url=GoFVR5Z_Zoop-1oQUgfIrE0F3-cxiTsjl8BUXhmahWerbQrGzee26WwMt4WAstL116Ceetd4WMpd9MCeGchuxK" target="_blank" rel="external">_findnext</a> , _findclose ，可以自行百度了解。<br>　　需要强调一点的是：程序里句柄 handle 的返回类型用了 long 类型，但需要注意的是如果编64位程序时，句柄的返回类型最好换成 intptr_t 类型。不然会出现因类型转换出现数据丢失而造成指针异常的问题。这个问题在VS2010基本不会出现，但用高版本的VS时必须注意。</p>
 
       
     </div>
@@ -355,7 +350,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Hexo/" rel="tag">#Hexo</a>
+            <a href="/tags/C/" rel="tag">#C++</a>
           
         </div>
       
@@ -364,13 +359,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/07/28/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/29/C-读取目录下所用文件/" rel="prev" title="C++读取目录下所用文件">
-                C++读取目录下所用文件 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -385,10 +380,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/07/28/hello-world/"
-     data-title="Hello World"
+        <div class="ds-share flat" data-thread-key="2016/07/29/C-读取目录下所用文件/"
+     data-title="C++读取目录下所用文件"
      data-content=""
-     data-url="http://yoursite.com/2016/07/28/hello-world/">
+     data-url="http://yoursite.com/2016/07/29/C-读取目录下所用文件/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -415,8 +410,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/07/28/hello-world/"
-           data-title="Hello World" data-url="http://yoursite.com/2016/07/28/hello-world/">
+      <div class="ds-thread" data-thread-key="2016/07/29/C-读取目录下所用文件/"
+           data-title="C++读取目录下所用文件" data-url="http://yoursite.com/2016/07/29/C-读取目录下所用文件/">
       </div>
     
   </div>
