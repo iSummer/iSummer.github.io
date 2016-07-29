@@ -1305,6 +1305,7 @@ pre .javascript .function {
   }
 }
 .post-more-link {
+  float: right;
   margin-top: 50px;
 }
 .post-more-link .btn {
@@ -1549,7 +1550,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #8a8538;
+  background: #38ffff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2379,6 +2380,9 @@ hr {
 .links-of-author-item a:hover {
   border-radius: 50%;
   background: #0ee;
+}
+.site-author-image {
+  margin-top: 60px;
 }
 .links-of-blogroll-inline .links-of-blogroll-item {
   display: inline-block;
