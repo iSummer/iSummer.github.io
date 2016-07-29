@@ -1409,16 +1409,6 @@ pre .javascript .function {
 .sidebar a:hover {
   color: #eee;
 }
-@media (min-width: 768px) and (max-width: 991px) {
-  .sidebar {
-    display: none !important;
-  }
-}
-@media (max-width: 767px) {
-  .sidebar {
-    display: none !important;
-  }
-}
 .sidebar-inner {
   position: relative;
   padding: 20px 10px;
@@ -1439,11 +1429,6 @@ pre .javascript .function {
   -webkit-transform: translateZ(0);
 }
 @media (min-width: 768px) and (max-width: 991px) {
-  .sidebar-toggle {
-    display: none;
-  }
-}
-@media (max-width: 767px) {
   .sidebar-toggle {
     display: none;
   }
@@ -1549,7 +1534,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #d69eff;
+  background: #5ef9ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2373,11 +2358,11 @@ hr {
   display: inline-block;
   width: 26px;
   margin-left: 15px;
-  border-radius: 12px;
+  border-radius: 50%;
   background-color: #055;
 }
 .links-of-author-item a:hover {
-  border-radius: 12px;
+  border-radius: 50%;
   background: #0ee;
 }
 .links-of-blogroll-inline .links-of-blogroll-item {
