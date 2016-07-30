@@ -1,0 +1,706 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C++,balser," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Isummer's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="basler相机提供USB3.0/GigE/CamerasLink三种连接方式。其中GigE指千兆网卡，CamerasLink是一种标准的相机接口。　　basler的SDK中提供了很多的示例代码及开发用的API文档。下面的代码是在SDK给的代码基础上改的，主要是为了处理GigE连接方式下多机同时采集的情况。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用SDK驱动basler相机采集图像">
+<meta property="og:url" content="http://yoursite.com/2016/07/30/使用SDK驱动basler相机采集图像/index.html">
+<meta property="og:site_name" content="Isummer's Blog">
+<meta property="og:description" content="basler相机提供USB3.0/GigE/CamerasLink三种连接方式。其中GigE指千兆网卡，CamerasLink是一种标准的相机接口。　　basler的SDK中提供了很多的示例代码及开发用的API文档。下面的代码是在SDK给的代码基础上改的，主要是为了处理GigE连接方式下多机同时采集的情况。">
+<meta property="og:updated_time" content="2016-07-30T07:26:51.042Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用SDK驱动basler相机采集图像">
+<meta name="twitter:description" content="basler相机提供USB3.0/GigE/CamerasLink三种连接方式。其中GigE指千兆网卡，CamerasLink是一种标准的相机接口。　　basler的SDK中提供了很多的示例代码及开发用的API文档。下面的代码是在SDK给的代码基础上改的，主要是为了处理GigE连接方式下多机同时采集的情况。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6312255055240103000,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/30/使用SDK驱动basler相机采集图像/"/>
+
+  <title> 使用SDK驱动basler相机采集图像 | Isummer's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Isummer's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                使用SDK驱动basler相机采集图像
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-30T15:10:36+08:00" content="2016-07-30">
+              2016-07-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/项目开发/" itemprop="url" rel="index">
+                    <span itemprop="name">项目开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/30/使用SDK驱动basler相机采集图像/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/30/使用SDK驱动basler相机采集图像/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>　　basler相机提供USB3.0/GigE/CamerasLink三种连接方式。其中GigE指千兆网卡，CamerasLink是一种标准的相机接口。<br>　　basler的SDK中提供了很多的示例代码及开发用的API文档。下面的代码是在SDK给的代码基础上改的，主要是为了处理GigE连接方式下多机同时采集的情况。<br><a id="more"></a><br>    basler工业相机的驱动安装以及VS环境配置请参考官方文档：<a href="http://www.baslerweb.com/cn/products/software/pylon-windows" target="_blank" rel="external">Window版Pylon</a></p>
+<p>上代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 引入相机SDK头文件</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pylon/PylonIncludes.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pylon/PylonGUI.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="comment">// 引入 SDK 命名空间 Pylon</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> Pylon;</div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> GenApi;</div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> Basler_GigECameraParams;</div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">typedef</span> Pylon::CBaslerGigEInstantCamera Camera_t;</div><div class="line"></div><div class="line"><span class="comment">// 设置需要采集的图像帧数</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">uint32_t</span> c_countOfImagesToGrab = <span class="number">10</span>;</div><div class="line"><span class="comment">// 设置最大的需要连接的相机个数</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">size_t</span> c_maxCamerasToUse = <span class="number">2</span>;</div><div class="line"></div><div class="line"><span class="built_in">vector</span>&lt;Camera_t *&gt; cameras;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">startGrabbing</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">size_t</span> i=<span class="number">0</span>; i&lt;cameras.size(); ++i)</div><div class="line">	&#123;</div><div class="line">		cameras[i]-&gt;StartGrabbing();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isGrabbing</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">size_t</span> i=<span class="number">0</span>; i&lt;cameras.size(); ++i)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(!cameras[i]-&gt;IsGrabbing())</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> exitCode = <span class="number">0</span>;</div><div class="line">	<span class="comment">// 初始化pylon运行环境</span></div><div class="line">    PylonInitialize();</div><div class="line"></div><div class="line">    <span class="keyword">try</span></div><div class="line">    &#123;</div><div class="line">        CTlFactory&amp; tlFactory = CTlFactory::GetInstance();</div><div class="line"></div><div class="line">        DeviceInfoList_t devices;　<span class="comment">// 设备信息列表</span></div><div class="line">        <span class="keyword">if</span> ( tlFactory.EnumerateDevices(devices) == <span class="number">0</span> )</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">throw</span> RUNTIME_EXCEPTION( <span class="string">"No camera present."</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 获取在线的相机的设备信息，结果保存在devices中</span></div><div class="line">        <span class="keyword">int</span> camerasCnt = min( devices.size(), c_maxCamerasToUse));</div><div class="line">        <span class="comment">// 获取在线相机个数</span></div><div class="line">        cameras = <span class="built_in">vector</span>&lt;Camera_t *&gt;(camerasCnt);</div><div class="line"></div><div class="line">        <span class="keyword">for</span> ( <span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; camerasCnt; ++i)</div><div class="line">        &#123;</div><div class="line">            cameras[ i ] = <span class="keyword">new</span> Camera_t;</div><div class="line">            <span class="comment">//绑定设备信息</span></div><div class="line">            cameras[i]-&gt;Attach( tlFactory.CreateDevice( devices[ i ]));</div><div class="line">        &#125;</div><div class="line">		<span class="comment">// 相机开始捕获</span></div><div class="line">        startGrabbing();</div><div class="line"></div><div class="line">        CGrabResultPtr ptrGrabResult;</div><div class="line"></div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; c_countOfImagesToGrab &amp;&amp; isGrabbing(); ++i)</div><div class="line">        &#123;</div><div class="line">	        <span class="keyword">for</span>(<span class="keyword">size_t</span> k=<span class="number">0</span>; k&lt;cameras.size(); k++)</div><div class="line">	        &#123;</div><div class="line">		        cameras[k]-&gt;RetrieveResult( <span class="number">5000</span>, ptrGrabResult, TimeoutHandling_ThrowException);</div><div class="line">		    	<span class="comment">// 相机捕获图像最核心的函数，参数列表中的第三个参数是需要捕获的异常事件，通常是超时异常，第一个参数是超时时间，这里是5000ms。</span></div><div class="line">	       		Pylon::DisplayImage(k, ptrGrabResult);</div><div class="line">	        	<span class="comment">// 显示图像，这里直接用了SDK中的函数。如果需要用到opencv库，可以把ptrGrabResult转换到Mat格式，再调用imshow显示图像。</span></div><div class="line">				<span class="comment">// Mat img = Mat(ptrGrabResult-&gt;GetHeight(), ptrGrabResult-&gt;GetWidth(), CV_8UC1, ptrGrabResult-&gt;GetBuffer());</span></div><div class="line">				<span class="comment">// SDK中也提供了保存图片的方法, 保存png格式图片代码如下：</span></div><div class="line">				CImagePersistence::Save( ImageFileFormat_Png, <span class="string">"GrabbedImage.png"</span>, ptrGrabResult);</div><div class="line">			&#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">catch</span> (<span class="keyword">const</span> GenericException &amp;e)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">cerr</span> &lt;&lt; <span class="string">"An exception occurred."</span> &lt;&lt; <span class="built_in">endl</span></div><div class="line">	        &lt;&lt; e.GetDescription() &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        exitCode = <span class="number">-1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">cerr</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">"Press Enter to exit."</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="keyword">while</span>( <span class="built_in">cin</span>.get() != <span class="string">'\n'</span>);</div><div class="line">	<span class="comment">// 调用SDK结束, 释放所有pylon资源</span></div><div class="line">    PylonTerminate(); </div><div class="line"></div><div class="line">    <span class="keyword">return</span> exitCode;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag">#C++</a>
+          
+            <a href="/tags/balser/" rel="tag">#balser</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/29/C-读取目录下所用文件/" rel="next" title="C++读取目录下所用文件">
+                <i class="fa fa-chevron-left"></i> C++读取目录下所用文件
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/07/30/使用SDK驱动basler相机采集图像/"
+     data-title="使用SDK驱动basler相机采集图像"
+     data-content=""
+     data-url="http://yoursite.com/2016/07/30/使用SDK驱动basler相机采集图像/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/30/使用SDK驱动basler相机采集图像/"
+           data-title="使用SDK驱动basler相机采集图像" data-url="http://yoursite.com/2016/07/30/使用SDK驱动basler相机采集图像/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Wu Peng" />
+          <p class="site-author-name" itemprop="name">Wu Peng</p>
+          <p class="site-description motion-element" itemprop="description">Just Do IT!</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/isummer" target="_blank" title="Github">
+                  <img class="social-links" src="/images/github.png" />
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3219310753" target="_blank" title="微博">
+                  <img class="social-links" src="/images/weibo.png" />
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/wu-peng-20-60" target="_blank" title="知乎">
+                  <img class="social-links" src="/images/zhihu.png" />
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://xubing.cf/" title="xnzaa" target="_blank">xnzaa</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hust.cf/" title="eiot" target="_blank">eiot</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://gcsun.github.io/" title="gcsun" target="_blank">gcsun</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wu Peng</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"isummer"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
