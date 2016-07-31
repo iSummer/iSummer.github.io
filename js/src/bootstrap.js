@@ -25,7 +25,7 @@ $(document).ready(function () {
   });
   */
 
-  var SIDEBAR_WIDTH = '320px';
+  var SIDEBAR_WIDTH = '200px';
   var SIDEBAR_DISPLAY_DURATION = 200;
 
   var siteNevToggleMotion = {
