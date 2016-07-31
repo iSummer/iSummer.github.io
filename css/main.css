@@ -1550,7 +1550,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #b5c8f6;
+  background: #20392b;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2245,6 +2245,14 @@ hr {
     display: inline-block;
   }
 }
+.menu .menu-item .fa {
+  margin-right: 5px;
+}
+@media (max-width: 767px) {
+  .menu .menu-item .fa {
+    margin-right: 0;
+  }
+}
 .menu .menu-item a {
   padding: 0 10px;
   background: none;
@@ -2260,14 +2268,6 @@ hr {
 }
 .menu .menu-item a:hover {
   background: #e1e1e1;
-}
-.menu .menu-item fa {
-  margin-right: 5px;
-}
-@media (max-width: 767px) {
-  .menu .menu-item fa {
-    margin-right: 0;
-  }
 }
 .menu a::before {
   display: none;
