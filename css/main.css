@@ -1550,7 +1550,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #3c9eff;
+  background: #cd8659;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2243,7 +2243,7 @@ hr {
 @media (max-width: 767px) {
   .menu .menu-item {
     display: inline-block;
-    width: 12%;
+    width: 15%;
   }
 }
 .menu .menu-item .fa {
