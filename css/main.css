@@ -1550,7 +1550,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #7a222d;
+  background: #93b9cb;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2255,6 +2255,7 @@ hr {
 @media (max-width: 767px) {
   .menu .menu-item a {
     text-align: left;
+    padding: 0 5px;
   }
 }
 .menu .menu-item a:hover {
