@@ -857,7 +857,8 @@ pre .javascript .function {
 }
 @media (max-width: 767px) {
   .back-to-top {
-    display: none;
+    bottom: -20px;
+    right: 10px;
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
@@ -1550,7 +1551,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #0e258e;
+  background: #732136;
 }
 .links-of-blogroll {
   font-size: 13px;
